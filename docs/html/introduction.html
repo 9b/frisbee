@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quick Start &mdash; frisbee 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Code Documentation" href="code.html" />
+    <link rel="prev" title="Frisbee" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> frisbee
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#sample-code">Sample Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example-output">Example Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">frisbee</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Quick Start</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<p><strong>Install the library</strong>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">frisbee</span></code> or <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code></p>
+<p><strong>Run a search</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">frisbee</span> <span class="pre">search</span> <span class="pre">-e</span> <span class="pre">bing</span> <span class="pre">-d</span> <span class="pre">bnpparibas.com</span> <span class="pre">-l</span> <span class="pre">50</span> <span class="pre">--save</span></code></p>
+</div>
+<div class="section" id="sample-code">
+<h1>Sample Code<a class="headerlink" href="#sample-code" title="Permalink to this headline">¶</a></h1>
+<p>This sample code shows some of the range of functionality within the module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">frisbee</span> <span class="k">import</span> <span class="n">Frisbee</span>
+
+<span class="c1"># Create an instance</span>
+<span class="n">frisbee</span> <span class="o">=</span> <span class="n">Frisbee</span><span class="p">(</span><span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Describe your job</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;engine&#39;</span><span class="p">:</span> <span class="s1">&#39;bing&#39;</span><span class="p">,</span> <span class="s1">&#39;modifier&#39;</span><span class="p">:</span> <span class="s1">&#39;site:github.com&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="s1">&#39;foo.bar&#39;</span><span class="p">,</span> <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}]</span>
+
+<span class="c1"># Execute the jobs</span>
+<span class="n">frisbee</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+
+<span class="c1"># Get the results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">frisbee</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-output">
+<h1>Example Output<a class="headerlink" href="#example-output" title="Permalink to this headline">¶</a></h1>
+<p>Below is an example job result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+    <span class="s2">&quot;engine&quot;</span><span class="p">:</span> <span class="s2">&quot;bing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;modifier&quot;</span><span class="p">:</span> <span class="s2">&quot;site:github.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;blockade.io&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-12-13 16:54:15&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-12-13 16:54:19&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;emails&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;info@blockade.io&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;processed&quot;</span><span class="p">:</span> <span class="mi">44</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;zealous_kirch&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="code.html" class="btn btn-neutral float-right" title="Code Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Frisbee" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brandon Dixon
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
