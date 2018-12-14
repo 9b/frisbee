@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='frisbee',
-    version='0.0.1',
+    version='0.0.2',
     description='Search tool to find email addresses by abusing search',
     url="https://github.com/9b/frisbee",
     author="Brandon Dixon",
