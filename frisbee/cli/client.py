@@ -49,6 +49,6 @@ def main():
             print("\n-= Email Results=-")
             for email in job['results']['emails']:
                 print(email)
-            print("\n-= FIN =-")
+            print("")
 
     sys.exit(1)

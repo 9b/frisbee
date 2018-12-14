@@ -49,10 +49,14 @@ class Module(Base):
         self.log.debug("Processing search results")
         items = list()
         for response in responses:
-            soup = BeautifulSoup(response.content, 'html.parser',
-                                 from_encoding="iso-8859-1")
-            listings = soup.findAll('li', {'class': 'b_algo'})
-            items.extend([l.find('a')['href'] for l in listings])
+            try:
+                soup = BeautifulSoup(response.content, 'html.parser',
+                                     from_encoding="iso-8859-1")
+            except:
+                continue
+            else:
+                listings = soup.findAll('li', {'class': 'b_algo'})
+                items.extend([l.find('a')['href'] for l in listings])
         self.log.debug("Search result URLs were extracted")
         return items
 
@@ -65,9 +69,12 @@ class Module(Base):
         """
         responses = self._request_bulk(urls)
         for response in responses:
-            soup = BeautifulSoup(response.content, 'html.parser',
-                                 from_encoding="iso-8859-1")
-            text = soup.get_text()
+            try:
+                soup = BeautifulSoup(response.content, 'html.parser',
+                                     from_encoding="iso-8859-1")
+                text = soup.get_text()
+            except Exception:
+                text = response.text
             self.data.append(text) # Opportunistic findings
         return responses
 

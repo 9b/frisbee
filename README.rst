@@ -28,7 +28,7 @@ Quick Start
 
 **Run a search**
 
-``frisbee search -e bing -d bnpparibas.com -l 50 --save``
+``frisbee search -e bing -d bnpparibas.com -l 50 --greedy --save``
 
 
 Sample Code
@@ -84,6 +84,11 @@ Features
 
 Changelog
 ---------
+12-14-18
+~~~~~~~~
+* Feature: Activated greedy option to save and output to screen
+* Bugfix: Wrapped loading of HTML for cases where data is dirty
+
 12-13-18
 ~~~~~~~~
 * Initial push!

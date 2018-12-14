@@ -36,7 +36,13 @@ class Frisbee:
         self._processed = list()
 
         self.results = list()
-        self.result_count = -1
+        self.saved = list()
+
+    def _reset(self):
+        """Reset some of the state in the class for multi-searches."""
+        self.project = namesgenerator.get_random_name()
+        self._processed = list()
+        self.results = list()
 
     def _config_bootstrap(self):
         """Handle the basic setup of the tool prior to user control.
@@ -85,6 +91,8 @@ class Frisbee:
         self._log.info("Saving results to '%s'" % self.output)
         path = self.output + "/"
         for job in self.results:
+            if job['domain'] in self.saved:
+                continue
             job['start_time'] = str_datetime(job['start_time'])
             job['end_time'] = str_datetime(job['end_time'])
             jid = random.randint(100000, 999999)
@@ -98,6 +106,7 @@ class Frisbee:
             for email in job['results']['emails']:
                 handle.write(email + "\n")
             handle.close()
+            self.saved.append(job['domain'])
 
     def search(self, jobs):
         """Perform searches based on job orders."""
@@ -119,23 +128,27 @@ class Frisbee:
         while not self._fulfilled.empty():
             output = self._fulfilled.get()
             output.update({'project': self.project})
+            self._processed.append(output['domain'])
             self.results.append(output)
 
-            # if output['greedy']:
-            #     bonus_jobs = list()
-            #     for item in output['results']['emails']:
-            #         found = item.split('@')[1]
-            #         if output['domain'] == found or found in self._processed:
-            #             continue
-            #         base = dict()
-            #         base['limit'] = output['limit']
-            #         base['modifier'] = output['modifier']
-            #         base['engine'] = output['engine']
-            #         base['greedy'] = False
-            #         base['domain'] = found
-            #         bonus_jobs.append(base)
-            #         self._processed.append(found)
-            #     self.search(bonus_jobs)
+            if output['greedy']:
+                bonus_jobs = list()
+                observed = list()
+                for item in output['results']['emails']:
+                    found = item.split('@')[1]
+                    if found in self._processed or found in observed:
+                        continue
+                    observed.append(found)
+                    base = dict()
+                    base['limit'] = output['limit']
+                    base['modifier'] = output['modifier']
+                    base['engine'] = output['engine']
+                    base['greedy'] = False
+                    base['domain'] = found
+                    bonus_jobs.append(base)
+
+                if len(bonus_jobs) > 0:
+                    self.search(bonus_jobs)
 
         self._log.info("All jobs processed")
         if self.output:
