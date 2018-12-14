@@ -14,6 +14,9 @@ from frisbee.utils import str_datetime
 from frisbee.utils import now_time
 
 
+os.environ['OBJC_DISABLE_INITIALIZE_FORK_SAFETY'] = 'YES'
+
+
 class Frisbee:
 
     """Class to interact with the core code."""
