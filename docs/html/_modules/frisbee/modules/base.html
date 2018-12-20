@@ -158,39 +158,42 @@
 <span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="k">import</span> <span class="n">wait</span>
 <span class="kn">from</span> <span class="nn">frisbee.utils</span> <span class="k">import</span> <span class="n">gen_logger</span>
 <span class="kn">from</span> <span class="nn">frisbee.utils</span> <span class="k">import</span> <span class="n">gen_headers</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">ClassVar</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span>
 
 
 <div class="viewcode-block" id="Base"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base">[docs]</a><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;Base module class to assist in writing new modules.&quot;&quot;&quot;</span>
 
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
-    <span class="n">log</span> <span class="o">=</span> <span class="n">gen_logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-    <span class="n">limit</span> <span class="o">=</span> <span class="mi">500</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span>
+    <span class="n">log</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">logging</span><span class="o">.</span><span class="n">Logger</span><span class="p">]</span> <span class="o">=</span> <span class="n">gen_logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="n">limit</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">500</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Local variables for the module.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_log_level</span><span class="p">(</span><span class="n">log_level</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Base.set_log_level"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base.set_log_level">[docs]</a>    <span class="k">def</span> <span class="nf">set_log_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+<div class="viewcode-block" id="Base.set_log_level"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base.set_log_level">[docs]</a>    <span class="k">def</span> <span class="nf">set_log_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Override the default log level of the class.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;info&#39;</span><span class="p">:</span>
-            <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
+            <span class="n">to_set</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
         <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;debug&#39;</span><span class="p">:</span>
-            <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
+            <span class="n">to_set</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
         <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span>
-            <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span></div>
+            <span class="n">to_set</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">to_set</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Base._request_bulk"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._request_bulk">[docs]</a>    <span class="k">def</span> <span class="nf">_request_bulk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">):</span>
+<div class="viewcode-block" id="Base._request_bulk"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._request_bulk">[docs]</a>    <span class="k">def</span> <span class="nf">_request_bulk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Batch the requests going out.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">urls</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No results were found&quot;</span><span class="p">)</span>
-        <span class="n">session</span> <span class="o">=</span> <span class="n">FuturesSession</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">))</span>
+        <span class="n">session</span><span class="p">:</span> <span class="n">FuturesSession</span> <span class="o">=</span> <span class="n">FuturesSession</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Bulk requesting: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">))</span>
         <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">gen_headers</span><span class="p">(),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
         <span class="n">done</span><span class="p">,</span> <span class="n">incomplete</span> <span class="o">=</span> <span class="n">wait</span><span class="p">(</span><span class="n">futures</span><span class="p">)</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">results</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">done</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
@@ -198,11 +201,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Failed result: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">err</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">results</span></div>
 
-<div class="viewcode-block" id="Base.search"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Base.search"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Execute search function and hand to processor.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Base._format"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._format">[docs]</a>    <span class="k">def</span> <span class="nf">_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Base._format"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._format">[docs]</a>    <span class="k">def</span> <span class="nf">_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Format search queries to perform in bulk.</span>
 
 <span class="sd">        Build up the URLs to call for the search engine. These will be ran</span>
@@ -210,7 +213,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Base._process"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._process">[docs]</a>    <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">responses</span><span class="p">):</span>
+<div class="viewcode-block" id="Base._process"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._process">[docs]</a>    <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">responses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Process search engine results for detailed analysis.</span>
 
 <span class="sd">        Search engine result pages (SERPs) come back with each request and will</span>
@@ -218,7 +221,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Base._fetch"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._fetch">[docs]</a>    <span class="k">def</span> <span class="nf">_fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">):</span>
+<div class="viewcode-block" id="Base._fetch"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._fetch">[docs]</a>    <span class="k">def</span> <span class="nf">_fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">urls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Perform bulk collection of data and return the content.</span>
 
 <span class="sd">        Gathering responses is handled by the base class and uses futures to</span>
@@ -227,7 +230,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="Base._extract"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._extract">[docs]</a>    <span class="k">def</span> <span class="nf">_extract</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Base._extract"><a class="viewcode-back" href="../../../code.html#frisbee.modules.base.Base._extract">[docs]</a>    <span class="k">def</span> <span class="nf">_extract</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Extract email addresses from results.</span>
 
 <span class="sd">        Text content from all crawled pages are ran through a simple email</span>

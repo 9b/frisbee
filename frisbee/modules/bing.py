@@ -9,7 +9,7 @@ class Module(Base):
     """Custom search module."""
 
     def __init__(self, domain=None, modifier=None, engine="bing", greedy=False,
-                 limit=500):
+                 fuzzy=False, limit=500):
         """Setup the primary client instance."""
         super(Base, self).__init__()
         self.name = "Bing"
@@ -17,6 +17,8 @@ class Module(Base):
         self.domain = domain
         self.modifier = modifier
         self.limit = limit
+        self.greedy = greedy
+        self.fuzzy = fuzzy
 
         self.results = list()
         self.data = list()
@@ -86,7 +88,7 @@ class Module(Base):
         """
         self.log.debug("Extracting emails from text content")
         for item in self.data:
-            emails = extract_emails(item, self.domain)
+            emails = extract_emails(item, self.domain, self.fuzzy)
             self.results.extend(emails)
         self.log.debug("Email extraction completed")
         return list(set(self.results))

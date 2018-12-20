@@ -79,11 +79,16 @@ Features
 * Modular design that can be extended easily to include new sources
 * Modifier options that can filter or target search query
 * Limit option to reduce the number of results parsed
-* Greedy option to learn from collected results
+* Greedy option to learn from collected results and fuzzy to find related
 * Save output describing job request and results
 
 Changelog
 ---------
+12-20-18
+~~~~~~~~
+* Feature: Added typing to the core code
+* Feature: Added a fuzzy flag to find related domains
+
 12-14-18
 ~~~~~~~~
 * Feature: Activated greedy option to save and output to screen

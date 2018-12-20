@@ -5,39 +5,42 @@ from requests_futures.sessions import FuturesSession
 from concurrent.futures import wait
 from frisbee.utils import gen_logger
 from frisbee.utils import gen_headers
+from typing import ClassVar
+from typing import Dict
+from typing import List
 
 
 class Base(object):
 
     """Base module class to assist in writing new modules."""
 
-    name = 'base'
-    log = gen_logger(name, logging.INFO)
-    limit = 500
+    name: ClassVar[str] = 'base'
+    log: ClassVar[logging.Logger] = gen_logger(name, logging.INFO)
+    limit: ClassVar[int] = 500
 
-    def __init__(self, log_level=logging.INFO):
+    def __init__(self, log_level=logging.INFO) -> None:
         """Local variables for the module."""
         self.set_log_level(log_level)
 
-    def set_log_level(self, level):
+    def set_log_level(self, level: str) -> None:
         """Override the default log level of the class."""
         if level == 'info':
-            level = logging.INFO
+            to_set = logging.INFO
         if level == 'debug':
-            level = logging.DEBUG
+            to_set = logging.DEBUG
         if level == 'error':
-            level = logging.ERROR
-        self.log.setLevel(level)
+            to_set = logging.ERROR
+        self.log.setLevel(to_set)
 
-    def _request_bulk(self, urls):
+    def _request_bulk(self, urls: List[str]) -> List:
         """Batch the requests going out."""
-        if len(urls) == 0:
+        if not urls:
             raise Exception("No results were found")
-        session = FuturesSession(max_workers=len(urls))
+        session: FuturesSession = FuturesSession(max_workers=len(urls))
         self.log.info("Bulk requesting: %d" % len(urls))
         futures = [session.get(u, headers=gen_headers(), timeout=3) for u in urls]
         done, incomplete = wait(futures)
-        results = list()
+        results: List = list()
         for response in done:
             try:
                 results.append(response.result())
@@ -45,11 +48,11 @@ class Base(object):
                 self.log.warn("Failed result: %s" % err)
         return results
 
-    def search(self):
+    def search(self) -> None:
         """Execute search function and hand to processor."""
         raise NotImplementedError
 
-    def _format(self):
+    def _format(self) -> None:
         """Format search queries to perform in bulk.
 
         Build up the URLs to call for the search engine. These will be ran
@@ -57,7 +60,7 @@ class Base(object):
         """
         raise NotImplementedError
 
-    def _process(self, responses):
+    def _process(self, responses: List[str]) -> None:
         """Process search engine results for detailed analysis.
 
         Search engine result pages (SERPs) come back with each request and will
@@ -65,7 +68,7 @@ class Base(object):
         """
         raise NotImplementedError
 
-    def _fetch(self, urls):
+    def _fetch(self, urls: List[str]) -> None:
         """Perform bulk collection of data and return the content.
 
         Gathering responses is handled by the base class and uses futures to
@@ -74,7 +77,7 @@ class Base(object):
         """
         raise NotImplementedError
 
-    def _extract(self):
+    def _extract(self) -> None:
         """Extract email addresses from results.
 
         Text content from all crawled pages are ran through a simple email

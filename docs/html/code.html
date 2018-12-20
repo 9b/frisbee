@@ -162,11 +162,11 @@
 <h2>Frisbee Interface<a class="headerlink" href="#frisbee-interface" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="frisbee.Frisbee">
-<em class="property">class </em><code class="descclassname">frisbee.</code><code class="descname">Frisbee</code><span class="sig-paren">(</span><em>project='confident_bell'</em>, <em>log_level=20</em>, <em>save=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">frisbee.</code><code class="descname">Frisbee</code><span class="sig-paren">(</span><em>project: str = 'elegant_booth'</em>, <em>log_level: int = 20</em>, <em>save: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to interact with the core code.</p>
 <dl class="method">
 <dt id="frisbee.Frisbee._config_bootstrap">
-<code class="descname">_config_bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee._config_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._config_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_config_bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee.html#Frisbee._config_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._config_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle the basic setup of the tool prior to user control.</p>
 <p>Bootstrap will load all the available modules for searching and set
 them up for use by this main class.</p>
@@ -174,37 +174,37 @@ them up for use by this main class.</p>
 
 <dl class="method">
 <dt id="frisbee.Frisbee._dyn_loader">
-<code class="descname">_dyn_loader</code><span class="sig-paren">(</span><em>module</em>, <em>kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee._dyn_loader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._dyn_loader" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_dyn_loader</code><span class="sig-paren">(</span><em>module: str</em>, <em>kwargs: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee._dyn_loader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._dyn_loader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamically load a specific module instance.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="frisbee.Frisbee._job_handler">
-<code class="descname">_job_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee._job_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._job_handler" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_job_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/frisbee.html#Frisbee._job_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._job_handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the work items.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="frisbee.Frisbee._reset">
-<code class="descname">_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee._reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._reset" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee.html#Frisbee._reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset some of the state in the class for multi-searches.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="frisbee.Frisbee._save">
-<code class="descname">_save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee._save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._save" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_save</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee.html#Frisbee._save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee._save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save output to a directory.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="frisbee.Frisbee.get_results">
-<code class="descname">get_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee.get_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee.get_results" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="_modules/frisbee.html#Frisbee.get_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee.get_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return results from the search.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="frisbee.Frisbee.search">
-<code class="descname">search</code><span class="sig-paren">(</span><em>jobs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee.html#Frisbee.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee.search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search</code><span class="sig-paren">(</span><em>jobs: List[Dict[str, str]]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee.html#Frisbee.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.Frisbee.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform searches based on job orders.</p>
 </dd></dl>
 
@@ -219,7 +219,7 @@ them up for use by this main class.</p>
 <dd><p>Base module class to assist in writing new modules.</p>
 <dl class="method">
 <dt id="frisbee.modules.base.Base._extract">
-<code class="descname">_extract</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee/modules/base.html#Base._extract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._extract" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_extract</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee/modules/base.html#Base._extract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._extract" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract email addresses from results.</p>
 <p>Text content from all crawled pages are ran through a simple email
 extractor. Data is cleaned prior to running pattern expressions.</p>
@@ -227,7 +227,7 @@ extractor. Data is cleaned prior to running pattern expressions.</p>
 
 <dl class="method">
 <dt id="frisbee.modules.base.Base._fetch">
-<code class="descname">_fetch</code><span class="sig-paren">(</span><em>urls</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee/modules/base.html#Base._fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._fetch" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_fetch</code><span class="sig-paren">(</span><em>urls: List[str]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee/modules/base.html#Base._fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._fetch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform bulk collection of data and return the content.</p>
 <p>Gathering responses is handled by the base class and uses futures to
 speed up the processing. Response data is saved inside a local variable
@@ -236,7 +236,7 @@ to be used later in extraction.</p>
 
 <dl class="method">
 <dt id="frisbee.modules.base.Base._format">
-<code class="descname">_format</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee/modules/base.html#Base._format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._format" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_format</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee/modules/base.html#Base._format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format search queries to perform in bulk.</p>
 <p>Build up the URLs to call for the search engine. These will be ran
 through a bulk processor and returned to a detailer.</p>
@@ -244,7 +244,7 @@ through a bulk processor and returned to a detailer.</p>
 
 <dl class="method">
 <dt id="frisbee.modules.base.Base._process">
-<code class="descname">_process</code><span class="sig-paren">(</span><em>responses</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee/modules/base.html#Base._process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._process" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_process</code><span class="sig-paren">(</span><em>responses: List[str]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee/modules/base.html#Base._process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process search engine results for detailed analysis.</p>
 <p>Search engine result pages (SERPs) come back with each request and will
 need to be extracted in order to crawl the actual hits.</p>
@@ -252,19 +252,19 @@ need to be extracted in order to crawl the actual hits.</p>
 
 <dl class="method">
 <dt id="frisbee.modules.base.Base._request_bulk">
-<code class="descname">_request_bulk</code><span class="sig-paren">(</span><em>urls</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee/modules/base.html#Base._request_bulk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._request_bulk" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_request_bulk</code><span class="sig-paren">(</span><em>urls: List[str]</em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="_modules/frisbee/modules/base.html#Base._request_bulk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base._request_bulk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Batch the requests going out.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="frisbee.modules.base.Base.search">
-<code class="descname">search</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee/modules/base.html#Base.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base.search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee/modules/base.html#Base.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute search function and hand to processor.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="frisbee.modules.base.Base.set_log_level">
-<code class="descname">set_log_level</code><span class="sig-paren">(</span><em>level</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/frisbee/modules/base.html#Base.set_log_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base.set_log_level" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_log_level</code><span class="sig-paren">(</span><em>level: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/frisbee/modules/base.html#Base.set_log_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frisbee.modules.base.Base.set_log_level" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override the default log level of the class.</p>
 </dd></dl>
 

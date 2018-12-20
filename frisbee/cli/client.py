@@ -29,13 +29,16 @@ def main():
     setup_parser.add_argument('-g', '--greedy', dest='greedy', required=False,
                               help='Use found results to search more.', default=False,
                               action='store_true')
+    setup_parser.add_argument('-f', '--fuzzy', dest='fuzzy', required=False,
+                              help='Use keyword instead of domain.', default=False,
+                              action='store_true')
     args = parser.parse_args()
 
     if args.cmd == 'search':
         frisbee = Frisbee(log_level=logging.DEBUG, save=args.to_save)
         jobs = [{'engine': args.engine, 'modifier': args.modifier,
                  'domain': args.domain, 'limit': args.limit,
-                 'greedy': args.greedy}]
+                 'greedy': args.greedy, 'fuzzy': args.fuzzy}]
         frisbee.search(jobs)
         results = frisbee.get_results()
         for job in results:
