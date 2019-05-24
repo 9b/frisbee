@@ -70,14 +70,16 @@ class Module(Base):
         to be used later in extraction.
         """
         responses = self._request_bulk(urls)
+        self.log.debug("Converting responses to text")
         for response in responses:
             try:
+                text = response.text
+            except Exception:
                 soup = BeautifulSoup(response.content, 'html.parser',
                                      from_encoding="iso-8859-1")
-                text = soup.get_text()
-            except Exception:
-                text = response.text
+                text = soup.get_text()  # This will result in errors at times as it smashes text together with the email address
             self.data.append(text) # Opportunistic findings
+        self.log.debug("Responses converted")
         return responses
 
     def _extract(self):

@@ -48,6 +48,7 @@ def main():
             print("\t[*] Modifer: %s" % job['modifier'])
             print("\t[*] Limit: %d" % job['limit'])
             print("\t[*] Duration: %s seconds" % job['duration'])
+            print("\t[*] Count: %d" % len(job['results']['emails']))
 
             print("\n-= Email Results=-")
             for email in job['results']['emails']:

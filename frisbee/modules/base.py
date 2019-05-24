@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import logging
 import requests
+import urllib3
 from requests_futures.sessions import FuturesSession
 from concurrent.futures import wait
+from frisbee.utils import clean_urls
 from frisbee.utils import gen_logger
 from frisbee.utils import gen_headers
 from typing import ClassVar
@@ -10,15 +12,18 @@ from typing import Dict
 from typing import List
 
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
 class Base(object):
 
     """Base module class to assist in writing new modules."""
 
     name: ClassVar[str] = 'base'
-    log: ClassVar[logging.Logger] = gen_logger(name, logging.INFO)
+    log: ClassVar[logging.Logger] = gen_logger(name, logging.DEBUG)
     limit: ClassVar[int] = 500
 
-    def __init__(self, log_level=logging.INFO) -> None:
+    def __init__(self, log_level=logging.DEBUG) -> None:
         """Local variables for the module."""
         self.set_log_level(log_level)
 
@@ -36,16 +41,23 @@ class Base(object):
         """Batch the requests going out."""
         if not urls:
             raise Exception("No results were found")
+        urls = clean_urls(urls)
         session: FuturesSession = FuturesSession(max_workers=len(urls))
         self.log.info("Bulk requesting: %d" % len(urls))
-        futures = [session.get(u, headers=gen_headers(), timeout=3) for u in urls]
-        done, incomplete = wait(futures)
+        futures = [
+            session.get(u, headers=gen_headers(), timeout=10, verify=False)
+            for u in urls
+        ]
+        self.log.info("Requests made")
+        done, _ = wait(futures)
         results: List = list()
+        self.log.info("Storing results")
         for response in done:
             try:
                 results.append(response.result())
             except Exception as err:
                 self.log.warn("Failed result: %s" % err)
+        self.log.info("Stored and returning")
         return results
 
     def search(self) -> None:
