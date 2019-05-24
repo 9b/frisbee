@@ -16,10 +16,6 @@ posted on the web by taking user-fed input and translating it into an
 automated search query. Users can extend frisbee by adding modules for new
 search engines or other obscure data sources.
 
-For detailed explanations of the library, please see the wiki_.
-
-.. _wiki: https://github.com/9b/frisbee/wiki
-
 Quick Start
 -----------
 **Install the library**:
