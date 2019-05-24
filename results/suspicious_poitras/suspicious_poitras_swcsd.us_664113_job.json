@@ -1,0 +1,18 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "swcsd.us",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:09",
+    "end_time": "2019-05-24 16:17:24",
+    "duration": "194",
+    "results": {
+        "emails": [
+            "jacqueline.wissman@swcsd.us",
+            "erin.mccloskey@swcsd.us"
+        ],
+        "processed": 92
+    }
+}

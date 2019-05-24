@@ -1,0 +1,15 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "gcsnc.com",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:14",
+    "end_time": "2019-05-24 16:17:26",
+    "duration": "192",
+    "results": {
+        "emails": [],
+        "processed": 21
+    }
+}

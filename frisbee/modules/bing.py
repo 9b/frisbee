@@ -106,4 +106,5 @@ class Module(Base):
         urls = self._process(serps)
         details = self._fetch(urls)
         emails = self._extract()
+        self.log.debug("Job completed")
         return {'emails': emails, 'processed': len(self.data)}

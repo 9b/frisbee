@@ -16,3 +16,4 @@ chromedriver
 .DS_Store
 .mypy_cache/*
 .mypy_cache
+scripts/

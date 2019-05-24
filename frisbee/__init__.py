@@ -58,7 +58,10 @@ class Frisbee:
         them up for use by this main class.
         """
         if self.output:
-            self.folder: str = os.getcwd() + "/" + self.project
+            self.folder: str = os.getcwd() + "/results"
+            if not os.path.exists(self.folder):
+                os.mkdir(self.folder)
+            self.folder += "/" + self.project
             os.mkdir(self.folder)
 
     def _dyn_loader(self, module: str, kwargs: str):
@@ -90,6 +93,10 @@ class Frisbee:
                 duration: str = str((task['end_time'] - task['start_time']).seconds)
                 task['duration'] = duration
                 task.update({'results': results})
+                if self.output:
+                    to_write = copy.deepcopy(task)
+                    to_write.update({'project': self.project})
+                    self._progressive_save(task)
                 self._fulfilled.put(task)
         return True
 
@@ -115,6 +122,25 @@ class Frisbee:
             handle.close()
             self.saved.append(job['domain'])
 
+    def _progressive_save(self, job) -> None:
+        """Save output to a dictionary as results stream in."""
+        self._log.info("Saving results to '%s'" % self.folder)
+        path: str = self.folder + "/"
+        job['start_time'] = str_datetime(job['start_time'])
+        job['end_time'] = str_datetime(job['end_time'])
+        jid: int = random.randint(100000, 999999)
+        filename: str = "%s_%s_%d_job.json" % (self.project, job['domain'], jid)
+        handle = open(path + filename, 'w')
+        handle.write(json.dumps(job, indent=4))
+        handle.close()
+
+        filename = "%s_%s_%d_emails.txt" % (self.project, job['domain'], jid)
+        handle = open(path + filename, 'w')
+        for email in job['results']['emails']:
+            handle.write(email + "\n")
+        handle.close()
+        self.saved.append(job['domain'])
+
     def search(self, jobs: List[Dict[str, str]]) -> None:
         """Perform searches based on job orders."""
         if not isinstance(jobs, list):
@@ -136,7 +162,7 @@ class Frisbee:
             output: Dict = self._fulfilled.get()
             output.update({'project': self.project})
             self._processed.append(output['domain'])
-            self.results.append(output)
+            # self.results.append(output)
 
             if output['greedy']:
                 bonus_jobs: List = list()
@@ -158,8 +184,8 @@ class Frisbee:
                     self.search(bonus_jobs)
 
         self._log.info("All jobs processed")
-        if self.output:
-            self._save()
+        # if self.output:
+        #     self._save()
 
     def get_results(self) -> List:
         """Return results from the search."""

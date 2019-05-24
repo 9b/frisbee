@@ -1,0 +1,31 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "acsd1.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:12",
+    "end_time": "2019-05-24 16:19:11",
+    "duration": "298",
+    "results": {
+        "emails": [
+            "jkropf@acsd1.org",
+            "mcrawford@acsd1.org",
+            "mpetty@acsd1.org",
+            "mdirks@acsd1.org",
+            "jqualls@acsd1.org",
+            "mhudson@acsd1.org",
+            "kodea@acsd1.org",
+            "slymans@acsd1.org",
+            "bthompson@acsd1.org",
+            "sanfinson@acsd1.org",
+            "humanresources@acsd1.org",
+            "rwilkison@acsd1.org",
+            "rwagner@acsd1.org",
+            "jyennie@acsd1.org",
+            "ckern@acsd1.org"
+        ],
+        "processed": 35
+    }
+}

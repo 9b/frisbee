@@ -1,0 +1,15 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "ogdensd.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:11",
+    "end_time": "2019-05-24 16:17:02",
+    "duration": "170",
+    "results": {
+        "emails": [],
+        "processed": 21
+    }
+}

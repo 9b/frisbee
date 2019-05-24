@@ -42,7 +42,7 @@ class Base(object):
         if not urls:
             raise Exception("No results were found")
         urls = clean_urls(urls)
-        session: FuturesSession = FuturesSession(max_workers=len(urls))
+        session: FuturesSession = FuturesSession()
         self.log.info("Bulk requesting: %d" % len(urls))
         futures = [
             session.get(u, headers=gen_headers(), timeout=10, verify=False)

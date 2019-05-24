@@ -1,0 +1,17 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "ironmail.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:16:38",
+    "end_time": "2019-05-24 16:18:15",
+    "duration": "96",
+    "results": {
+        "emails": [
+            "lindsey.delcore@ironmail.org"
+        ],
+        "processed": 19
+    }
+}

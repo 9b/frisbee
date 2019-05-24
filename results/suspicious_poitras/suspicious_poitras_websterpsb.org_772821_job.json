@@ -1,0 +1,18 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "websterpsb.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:16:24",
+    "end_time": "2019-05-24 16:20:28",
+    "duration": "243",
+    "results": {
+        "emails": [
+            "gray.haynes@websterpsb.org",
+            "mfinley@websterpsb.org"
+        ],
+        "processed": 100
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "dillonatech.com",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:13",
+    "end_time": "2019-05-24 16:16:38",
+    "duration": "145",
+    "results": {
+        "emails": [],
+        "processed": 4
+    }
+}

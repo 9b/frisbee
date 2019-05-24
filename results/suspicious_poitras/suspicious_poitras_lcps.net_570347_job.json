@@ -1,0 +1,17 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "lcps.net",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:14",
+    "end_time": "2019-05-24 16:17:02",
+    "duration": "168",
+    "results": {
+        "emails": [
+            "jmestres@lcps.net"
+        ],
+        "processed": 15
+    }
+}

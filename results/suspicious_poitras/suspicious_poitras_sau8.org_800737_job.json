@@ -1,0 +1,15 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "sau8.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:12",
+    "end_time": "2019-05-24 16:16:07",
+    "duration": "115",
+    "results": {
+        "emails": [],
+        "processed": 15
+    }
+}

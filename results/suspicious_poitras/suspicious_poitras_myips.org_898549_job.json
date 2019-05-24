@@ -1,0 +1,23 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "myips.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:13",
+    "end_time": "2019-05-24 16:17:37",
+    "duration": "204",
+    "results": {
+        "emails": [
+            "hoopsd@myips.org",
+            "sullivma@myips.org",
+            "moorevj@myips.org",
+            "oconnormb@myips.org",
+            "arnoldd@myips.org",
+            "goree@myips.org",
+            "bentleyk@myips.org"
+        ],
+        "processed": 56
+    }
+}

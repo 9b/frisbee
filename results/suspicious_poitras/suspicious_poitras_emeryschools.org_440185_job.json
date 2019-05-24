@@ -1,0 +1,20 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "emeryschools.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:15:58",
+    "end_time": "2019-05-24 16:21:38",
+    "duration": "340",
+    "results": {
+        "emails": [
+            "peacockn@emeryschools.org",
+            "roger@emeryschools.org",
+            "warrenj@emeryschools.org",
+            "kimberlya@emeryschools.org"
+        ],
+        "processed": 145
+    }
+}

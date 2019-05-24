@@ -1,0 +1,19 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "ocsd4sc.net",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:13",
+    "end_time": "2019-05-24 16:17:11",
+    "duration": "178",
+    "results": {
+        "emails": [
+            "brad.coleman@ocsd4sc.net",
+            "wayne.dukes@ocsd4sc.net",
+            "april.smith@ocsd4sc.net"
+        ],
+        "processed": 32
+    }
+}

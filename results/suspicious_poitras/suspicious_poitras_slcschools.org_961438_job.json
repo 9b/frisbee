@@ -1,0 +1,15 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "slcschools.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:12",
+    "end_time": "2019-05-24 16:16:42",
+    "duration": "150",
+    "results": {
+        "emails": [],
+        "processed": 10
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "engine": "bing",
+    "modifier": null,
+    "domain": "lexrich5.org",
+    "limit": 150,
+    "greedy": false,
+    "fuzzy": false,
+    "start_time": "2019-05-24 16:14:12",
+    "end_time": "2019-05-24 16:16:01",
+    "duration": "109",
+    "results": {
+        "emails": [
+            "rfine@lexrich5.org",
+            "kthacker@lexrich5.org",
+            "asmith@lexrich5.org",
+            "mroberts@lexrich5.org",
+            "lweaver@lexrich5.org",
+            "eddavis@lexrich5.org",
+            "shlee@lexrich5.org",
+            "acfeldne@lexrich5.org",
+            "kroper@lexrich5.org"
+        ],
+        "processed": 39
+    }
+}
