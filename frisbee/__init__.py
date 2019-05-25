@@ -83,6 +83,7 @@ class Frisbee:
             try:
                 task = self._unfullfilled.get_nowait()
             except queue.Empty:
+                self._log.debug("Queue is empty, QUIT")
                 break
             else:
                 self._log.debug("Job: %s" % str(task))
@@ -141,7 +142,7 @@ class Frisbee:
         handle.close()
         self.saved.append(job['domain'])
 
-    def search(self, jobs: List[Dict[str, str]], init=True) -> None:
+    def search(self, jobs: List[Dict[str, str]], greed=False) -> None:
         """Perform searches based on job orders."""
         if not isinstance(jobs, list):
             raise Exception("Jobs must be of type list.")
@@ -150,14 +151,16 @@ class Frisbee:
         for _, job in enumerate(jobs):
             self._unfullfilled.put(job)
 
-        if init:
-            for _ in range(self.PROCESSES):
-                proc: Process = Process(target=self._job_handler)
-                self._processes.append(proc)
-                proc.start()
+        launch = self.PROCESSES
+        if greed:
+            launch = len(jobs)
+        for _ in range(launch):
+            proc: Process = Process(target=self._job_handler)
+            self._processes.append(proc)
+            proc.start()
 
-            for proc in self._processes:
-                proc.join()
+        for proc in self._processes:
+            proc.join()
 
         while not self._fulfilled.empty():
             output: Dict = self._fulfilled.get()
@@ -182,13 +185,11 @@ class Frisbee:
                     bonus_jobs.append(base)
 
                 if len(bonus_jobs) > 0:
-                    self.search(bonus_jobs, init=False)
+                    self.search(bonus_jobs, greed=True)
 
         self._log.info("All jobs processed")
         # if self.output:
         #     self._save()
-
-    def
 
     def get_results(self) -> List:
         """Return results from the search."""
