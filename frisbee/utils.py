@@ -50,13 +50,15 @@ def now_time() -> datetime.datetime:
 def extract_emails(results: str, domain: str, fuzzy: bool) -> List[str]:
     """Grab email addresses from raw text data."""
     pattern: Pattern = re.compile(r'([\w.-]+@[\w.-]+)', re.IGNORECASE)
+    if len(results) > 1500000:
+        return list()
     hits: List[str] = list(set(pattern.findall(results)))
     if fuzzy:
         seed = domain.split('.')[0]
         emails: List[str] = [x.lower().strip('.') for x in hits if x.split('@')[1].__contains__(seed)]
     else:
         emails: List[str] = [x.lower().strip('.') for x in hits if x.endswith(domain)]
-    return list(set(emails))
+    return emails
 
 
 def clean_urls(urls: List) -> List[str]:
