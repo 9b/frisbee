@@ -139,7 +139,6 @@ class Frisbee:
         for email in job['results']['emails']:
             handle.write(email + "\n")
         handle.close()
-        self.saved.append(job['domain'])
 
     def search(self, jobs: List[Dict[str, str]]) -> None:
         """Perform searches based on job orders."""
@@ -162,7 +161,7 @@ class Frisbee:
             output: Dict = self._fulfilled.get()
             output.update({'project': self.project})
             self._processed.append(output['domain'])
-            # self.results.append(output)
+            self.results.append(output)
 
             if output['greedy']:
                 bonus_jobs: List = list()
