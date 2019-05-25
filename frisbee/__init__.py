@@ -202,11 +202,6 @@ class Frisbee:
             self._log.debug("Starting: w-%d" % idx)
             proc.start()
 
-        for proc in self._processes:
-            print("Waiting to join")
-            proc.join()
-        print("Joined up")
-
         while not self._fulfilled.empty():
             output: Dict = self._fulfilled.get()
             output.update({'project': self.project})
