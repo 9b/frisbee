@@ -141,7 +141,7 @@ class Frisbee:
         handle.close()
         self.saved.append(job['domain'])
 
-    def search(self, jobs: List[Dict[str, str]]) -> None:
+    def search(self, jobs: List[Dict[str, str]], init=True) -> None:
         """Perform searches based on job orders."""
         if not isinstance(jobs, list):
             raise Exception("Jobs must be of type list.")
@@ -150,13 +150,14 @@ class Frisbee:
         for _, job in enumerate(jobs):
             self._unfullfilled.put(job)
 
-        for _ in range(self.PROCESSES):
-            proc: Process = Process(target=self._job_handler)
-            self._processes.append(proc)
-            proc.start()
+        if init:
+            for _ in range(self.PROCESSES):
+                proc: Process = Process(target=self._job_handler)
+                self._processes.append(proc)
+                proc.start()
 
-        for proc in self._processes:
-            proc.join()
+            for proc in self._processes:
+                proc.join()
 
         while not self._fulfilled.empty():
             output: Dict = self._fulfilled.get()
@@ -181,11 +182,13 @@ class Frisbee:
                     bonus_jobs.append(base)
 
                 if len(bonus_jobs) > 0:
-                    self.search(bonus_jobs)
+                    self.search(bonus_jobs, init=False)
 
         self._log.info("All jobs processed")
         # if self.output:
         #     self._save()
+
+    def
 
     def get_results(self) -> List:
         """Return results from the search."""
