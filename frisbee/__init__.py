@@ -83,7 +83,8 @@ class Frisbee:
             try:
                 task = self._unfullfilled.get_nowait()
             except queue.Empty:
-                self._log.debug("Queue is empty, QUIT")
+                name = current_process().name
+                self._log.debug("Queue is empty, QUIT: %s" % name)
                 break
             else:
                 self._log.debug("Job: %s" % str(task))
@@ -154,9 +155,11 @@ class Frisbee:
         launch = self.PROCESSES
         if greed:
             launch = len(jobs)
-        for _ in range(launch):
-            proc: Process = Process(target=self._job_handler)
+        for idx in range(launch):
+            proc: Process = Process(name="w-%d" % idx,
+                                    target=self._job_handler)
             self._processes.append(proc)
+            self._log.debug("Starting: w-%d" % idx)
             proc.start()
 
         for proc in self._processes:
