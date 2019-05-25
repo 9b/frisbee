@@ -194,7 +194,7 @@ class Frisbee:
             launch = len(jobs)
         for idx in range(launch):
             proc: Process = Process(name="w-%d" % idx,
-                                    target=_job_handler)
+                                    target=self._job_handler)
             self._processes.append(proc)
             self._log.debug("Starting: w-%d" % idx)
             proc.start()
