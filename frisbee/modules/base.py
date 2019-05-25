@@ -20,10 +20,10 @@ class Base(object):
     """Base module class to assist in writing new modules."""
 
     name: ClassVar[str] = 'base'
-    log: ClassVar[logging.Logger] = gen_logger(name, logging.DEBUG)
+    log: ClassVar[logging.Logger] = gen_logger(name, logging.INFO)
     limit: ClassVar[int] = 500
 
-    def __init__(self, log_level=logging.DEBUG) -> None:
+    def __init__(self, log_level=logging.INFO) -> None:
         """Local variables for the module."""
         self.set_log_level(log_level)
 
@@ -43,21 +43,21 @@ class Base(object):
             raise Exception("No results were found")
         urls = clean_urls(urls)
         session: FuturesSession = FuturesSession()
-        self.log.info("Bulk requesting: %d" % len(urls))
+        self.log.debug("Bulk requesting: %d" % len(urls))
         futures = [
             session.get(u, headers=gen_headers(), timeout=10, verify=False)
             for u in urls
         ]
-        self.log.info("Requests made")
+        self.log.debug("Requests made")
         done, _ = wait(futures)
         results: List = list()
-        self.log.info("Storing results")
+        self.log.debug("Storing results")
         for response in done:
             try:
                 results.append(response.result())
             except Exception as err:
                 self.log.warn("Failed result: %s" % err)
-        self.log.info("Stored and returning")
+        self.log.debug("Stored and returning")
         return results
 
     def search(self) -> None:
