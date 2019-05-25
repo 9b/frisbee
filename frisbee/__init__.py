@@ -77,11 +77,12 @@ class Frisbee:
         obj = getattr(imported, 'Module')
         return obj(**kwargs)
 
-    def _job_handler(self) -> bool:
+    def _job_handler(self, uq, fq) -> bool:
         """Process the work items."""
         while True:
             try:
-                task = self._unfullfilled.get_nowait()
+                # task = self._unfullfilled.get_nowait()
+                task = uq.get_nowait()
             except queue.Empty:
                 name = current_process().name
                 self._log.debug("Queue is empty, QUIT: %s" % name)
@@ -99,7 +100,8 @@ class Frisbee:
                     to_write = copy.deepcopy(task)
                     to_write.update({'project': self.project})
                     self._progressive_save(task)
-                self._fulfilled.put(task)
+                # self._fulfilled.put(task)
+                fq.put(task)
         return True
 
     def _save(self) -> None:
@@ -157,7 +159,8 @@ class Frisbee:
             launch = len(jobs)
         for idx in range(launch):
             proc: Process = Process(name="w-%d" % idx,
-                                    target=self._job_handler)
+                                    target=self._job_handler,
+                                    args=(self._unfullfilled, self._fulfilled,))
             self._processes.append(proc)
             self._log.debug("Starting: w-%d" % idx)
             proc.start()
