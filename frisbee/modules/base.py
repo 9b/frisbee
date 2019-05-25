@@ -20,10 +20,10 @@ class Base(object):
     """Base module class to assist in writing new modules."""
 
     name: ClassVar[str] = 'base'
-    log: ClassVar[logging.Logger] = gen_logger(name, logging.INFO)
+    log: ClassVar[logging.Logger] = gen_logger(name, logging.DEBUG)
     limit: ClassVar[int] = 500
 
-    def __init__(self, log_level=logging.INFO) -> None:
+    def __init__(self, log_level=logging.DEBUG) -> None:
         """Local variables for the module."""
         self.set_log_level(log_level)
 
