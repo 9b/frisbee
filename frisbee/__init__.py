@@ -20,6 +20,43 @@ from frisbee.utils import now_time
 os.environ['OBJC_DISABLE_INITIALIZE_FORK_SAFETY'] = 'YES'
 
 
+def _dyn_loader(module: str, kwargs: str):
+    """Dynamically load a specific module instance."""
+    package_directory: str = os.path.dirname(os.path.abspath(__file__))
+    modules: str = package_directory + "/modules"
+    module = module + ".py"
+    if module not in os.listdir(modules):
+        raise Exception("Module %s is not valid" % module)
+    module_name: str = module[:-3]
+    import_path: str = "%s.%s" % ("frisbee.modules", module_name)
+    imported = import_module(import_path)
+    obj = getattr(imported, 'Module')
+    return obj(**kwargs)
+
+
+def _job_handler(uq, fq) -> bool:
+    """Process the work items."""
+    while True:
+        try:
+            task = uq.get_nowait()
+        except queue.Empty:
+            name = current_process().name
+            print("Queue is empty, QUIT: %s" % name)
+            break
+        else:
+            print("Job: %s" % str(task))
+            engine = _dyn_loader(task['engine'], task)
+            task['start_time'] = now_time()
+            results = engine.search()
+            task['end_time'] = now_time()
+            duration: str = str((task['end_time'] - task['start_time']).seconds)
+            task['duration'] = duration
+            task.update({'results': results})
+            print("Job, DONE")
+            fq.put(task)
+    return True
+
+
 class Frisbee:
 
     """Class to interact with the core code."""
@@ -159,7 +196,7 @@ class Frisbee:
             launch = len(jobs)
         for idx in range(launch):
             proc: Process = Process(name="w-%d" % idx,
-                                    target=self._job_handler,
+                                    target=_job_handler,
                                     args=(self._unfullfilled, self._fulfilled,))
             self._processes.append(proc)
             self._log.debug("Starting: w-%d" % idx)
