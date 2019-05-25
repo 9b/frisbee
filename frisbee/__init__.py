@@ -58,7 +58,10 @@ class Frisbee:
         them up for use by this main class.
         """
         if self.output:
-            self.folder: str = os.getcwd() + "/" + self.project
+            self.folder: str = os.getcwd() + "/results"
+            if not os.path.exists(self.folder):
+                os.mkdir(self.folder)
+            self.folder += "/" + self.project
             os.mkdir(self.folder)
 
     def _dyn_loader(self, module: str, kwargs: str):
