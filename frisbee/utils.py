@@ -13,6 +13,7 @@ from typing import Pattern
 EXTENSIONS = ['pdf', 'doc', 'docx', 'ppt', 'pptx', 'png', 'jpg', 'tiff', 'gif',
               'jpeg', 'psd', 'eps', 'raw', 'zip', 'exe', 'dmg', 'tar', 'tgz',
               'iso', 'rar', 'rpm', 'bin', 'jar', 'xls', 'xlsx']
+PATTERN: Pattern = re.compile(r'([\w.-]+@[\w.-]+)', re.IGNORECASE)
 
 
 def gen_logger(name: str, log_level: int=logging.INFO) -> logging.Logger:
@@ -49,15 +50,20 @@ def now_time() -> datetime.datetime:
 
 def extract_emails(results: str, domain: str, fuzzy: bool) -> List[str]:
     """Grab email addresses from raw text data."""
-    pattern: Pattern = re.compile(r'([\w.-]+@[\w.-]+)', re.IGNORECASE)
-    if len(results) > 1500000:
-        return list()
-    hits: List[str] = list(set(pattern.findall(results)))
+    hits = list()
+    for match in PATTERN.finditer(results):
+        hits.append(tuple(match.groups())[0])
+    hits = list(set(hits))
     if fuzzy:
         seed = domain.split('.')[0]
         emails: List[str] = [x.lower().strip('.') for x in hits if x.split('@')[1].__contains__(seed)]
     else:
-        emails: List[str] = [x.lower().strip('.') for x in hits if x.endswith(domain)]
+        emails = list()
+        for match in hits:
+            if domain not in match:
+                continue
+            match = match.lower()
+            emails.append(match[:match.find(domain) + len(domain)])
     return emails
 
 
