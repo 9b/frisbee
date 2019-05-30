@@ -26,6 +26,10 @@ Quick Start
 
 ``frisbee search -e bing -d bnpparibas.com -l 50 --greedy --save``
 
+**Search in bulk**
+
+``frisbee search -e bing -f domains -l 50 --save``
+
 
 Sample Code
 -----------
@@ -77,9 +81,20 @@ Features
 * Limit option to reduce the number of results parsed
 * Greedy option to learn from collected results and fuzzy to find related
 * Save output describing job request and results
+* Individual or bulk look-ups using the command line utility
 
 Changelog
 ---------
+05-30-19
+~~~~~~~~
+* Feature: Added a bulk option to the command line tool to ease usage
+* Change: Replaced multiprocessing with concurrent.futures to simplify logic
+* Change: Split logic of dynamic module loading and future work outside of the Frisbee class
+* Change: Reverted back to the BS4 parsing versus raw text
+* Change: Replaced the regular expression processing to be more efficient
+* Change: Progressively save results as they come in to avoid any losses from a deadlock
+* Change: Randomize the top-level directory to avoid conflicts
+
 05-24-19
 ~~~~~~~~
 * Feature: Clean SERPs to remove files or other formats we can't inspect

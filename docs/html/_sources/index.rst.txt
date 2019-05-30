@@ -29,6 +29,7 @@ Features
 * Limit option to reduce the number of results parsed
 * Greedy option to learn from collected results
 * Save output describing job request and results
+* Individual or bulk look-ups using the command line utility
 
 
 Code Documentation
@@ -43,7 +44,7 @@ Code Documentation
 
 License
 -------
-Copyright 2018 Brandon Dixon
+Copyright Brandon Dixon
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
