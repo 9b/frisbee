@@ -40,7 +40,7 @@ class Base(object):
     def _request_bulk(self, urls: List[str]) -> List:
         """Batch the requests going out."""
         if not urls:
-            raise Exception("No results were found")
+            return list()
         urls = clean_urls(urls)
         session: FuturesSession = FuturesSession()
         self.log.debug("Bulk requesting: %d" % len(urls))
