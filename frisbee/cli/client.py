@@ -46,24 +46,8 @@ def main():
             jobs = [{'engine': args.engine, 'modifier': args.modifier,
                      'domain': args.domain, 'limit': args.limit,
                      'greedy': args.greedy, 'fuzzy': args.fuzzy}]
-            frisbee.search(jobs)
-            results = frisbee.get_results()
-            for job in results:
-                print("-= %s Details =-" % job['project'].upper())
-                print("\t[*] Engine: %s" % job['engine'])
-                print("\t[*] Domain: %s" % job['domain'])
-                print("\t[*] Modifer: %s" % job['modifier'])
-                print("\t[*] Limit: %d" % job['limit'])
-                print("\t[*] Duration: %s seconds" % job['duration'])
-                print("\t[*] Count: %d" % len(job['results']['emails']))
-
-                print("\n-= Email Results=-")
-                for email in job['results']['emails']:
-                    print(email)
-                print("")
 
         if args.file:
-            frisbee = Frisbee(log_level=logging.DEBUG, save=args.to_save)
             domains = [x.strip() for x in open(args.file, 'r').readlines()]
             domains = list(set(domains))
             jobs = list()
@@ -72,6 +56,23 @@ def main():
                        'domain': domain, 'limit': args.limit,
                        'greedy': args.greedy, 'fuzzy': args.fuzzy}
                 jobs.append(job)
-            frisbee.search(jobs)
+
+        frisbee.search(jobs)
+        results = frisbee.get_results()
+        for job in results:
+            print("-= %s Details =-" % job['project'].upper())
+            print("\t[*] Engine: %s" % job['engine'])
+            print("\t[*] Domain: %s" % job['domain'])
+            print("\t[*] Modifer: %s" % job['modifier'])
+            print("\t[*] Limit: %d" % job['limit'])
+            print("\t[*] Duration: %s seconds" % job['duration'])
+            print("\t[*] Count: %d" % len(job['results']['emails']))
+
+            print("\n-= Email Results=-")
+            if not len(job['results']['emails']):
+                print("No results")
+            for email in job['results']['emails']:
+                print(email)
+            print("")
 
     sys.exit(1)
