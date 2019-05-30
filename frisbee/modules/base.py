@@ -45,7 +45,7 @@ class Base(object):
         session: FuturesSession = FuturesSession()
         self.log.debug("Bulk requesting: %d" % len(urls))
         futures = [
-            session.get(u, headers=gen_headers(), timeout=10, verify=False)
+            session.get(u, headers=gen_headers(), timeout=7, verify=False)
             for u in urls
         ]
         self.log.debug("Requests made")

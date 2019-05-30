@@ -8,7 +8,6 @@ from importlib import import_module
 from typing import ClassVar
 from typing import Dict
 from typing import List
-import multiprocessing
 import namesgenerator
 from frisbee.utils import gen_logger
 from frisbee.utils import str_datetime
@@ -17,7 +16,6 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 
 
 os.environ['OBJC_DISABLE_INITIALIZE_FORK_SAFETY'] = 'YES'
-CPU_COUNT = multiprocessing.cpu_count()
 
 
 def dyn_loader(module: str, kwargs: str):
@@ -133,7 +131,8 @@ class Frisbee:
         self._log.info("Processing jobs: %d", len(jobs))
 
         if not executor:
-            executor = ProcessPoolExecutor(max_workers=CPU_COUNT)
+            #  Reuse the same executor pool when processing greedy jobs
+            executor = ProcessPoolExecutor()
 
         futures = [executor.submit(collect, job) for job in jobs]
         for future in as_completed(futures):
@@ -147,7 +146,9 @@ class Frisbee:
                 bonus_jobs: List = list()
                 observed: List = list()
                 for item in output['results']['emails']:
-                    print(item)
+                    part_split = item.split('@')
+                    if len(part_split) == 1:
+                        continue
                     found: str = item.split('@')[1]
                     if found in self._processed or found in observed:
                         continue
